@@ -1,0 +1,241 @@
+{% extends 'templating.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+	{% block metatag %}
+	<title>Horoscope | Astroconnect </title>		
+	{% endblock %}
+    {% block content %}	
+    <section class="page-title-banner" style="background-image:url({% static 'img/banner_image.jpg' %});">
+        <div class="container">
+            <div class="row m-0 align-items-end detail-swap">
+                <div class="tr-list-wrap">
+                    <div class="tr-list-detail">
+                        <div class="tr-list-thumb">
+                            <img src="{% static 'img/horoscope.png' %}" class="img-responsive" alt="horoscope">
+                        </div>
+                        <div class="tr-list-info">
+                            <h4>Horoscope</h4>
+                            <p><hr></p>
+                        </div>
+                    </div>
+                    <div class="listing-detail_right">
+                        <div class="listing-detail-item">
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#add-review" class="btn btn-list">Home / Horoscope</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <p align="justify">Moon in Aquarius will provide you with the energy that you seek. Procrastination is not the secret to success, hard work is - this is the message that planets seem to be sending across to us. So, if you have been dreading to begin a task or solve a problem that frightens you to the core, it is time to dive into your fears. And be assured that you will emerge out triumphant, but you must muster the courage to confront those seemingly impossible to deal with problems that have been blocking your path to success. The one thing that we must be cautious of is our speech, suggest astroYogi astrologers. Let your good deeds do all the talking for you. Moon in Aquarius is ready to bring in the changes that you have been waiting for, the question is are you?</p>
+        </div>
+    </section>
+      <div class="card" style="background-color: #dddddd;">
+        <form method="POST">
+          {% csrf_token %}
+            <table class="table table-dark">
+                <tr>
+                    <td>{{ form.fullname.label }}</td><td>{{ form.fullname}}</td>
+                    <td>{{ form.dob.label }}(YYYY-MM-DD)</td><td>{{form.dob}}</td> 
+                    <td>{{ form.btime.label }}</td><td>{{form.btime}}</td>
+                    <td><input type="submit" value="Get My Horoscope" class="btn btn-primary" style="border-radius: 500px;"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <section>
+        <h1 align="center"> FREE HOROSCOPE FOR TODAY </h1>
+        <div class="row">
+            {% for tnh1 in today_normal_horo1 %}
+            <div class="col-md-2">
+                <div class="card-body" style="max-width: 18rem;">
+                    <p align="center"><img src="{{ tnh1.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+                    <div>
+                        <p class="card-title" align="center">{{ tnh1.zodiac }} {{ tnh1.category }} Horoscope </p>
+                        <p class="card-text" align="center">for {{ tnh1.date }}</p>
+                        <p align="center"><a href="{% url 'viewdailyhoroscope' tnh1.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            {% for tnh2 in today_normal_horo2 %}
+            <div class="col-md-2">
+                <div class="card-body" style="max-width: 18rem;">
+                    <p align="center"><img src="{{ tnh2.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+                    <div>
+                        <p class="card-title" align="center">{{ tnh2.zodiac }} {{ tnh2.category }} Horoscope </p>
+                        <p class="card-text" align="center">for {{ tnh2.date }}</p>
+                        <p align="center"><a href="{% url 'viewdailyhoroscope' tnh2.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+                    </div>
+                </div>
+        
+            </div>
+            {% endfor %}
+        </div> 
+    </section>
+    <hr>
+    <section>
+        <h1 align="center"> FREE HOROSCOPE FOR TODAY </h1>
+        <div class="row">
+            {% for tnh1 in today_normal_horo1 %}
+            <div class="col-md-2">
+                <div class="card-body" style="max-width: 18rem;">
+                    <p align="center"><img src="{{ tnh1.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+                    <div>
+                        <p class="card-title" align="center">{{ tnh1.zodiac }} {{ tnh1.category }} Horoscope </p>
+                        <p class="card-text" align="center">for {{ tnh1.date }}</p>
+                        <p align="center"><a href="{% url 'viewdailyhoroscope' tnh1.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            {% for tnh2 in today_normal_horo2 %}
+            <div class="col-md-2">
+                <div class="card-body" style="max-width: 18rem;">
+                    <p align="center"><img src="{{ tnh2.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+                    <div>
+                        <p class="card-title" align="center">{{ tnh2.zodiac }} {{ tnh2.category }} Horoscope </p>
+                        <p class="card-text" align="center">for {{ tnh2.date }}</p>
+                        <p align="center"><a href="{% url 'viewdailyhoroscope' tnh2.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <hr>
+    <section>
+        <h1 align="center"> FREE HOROSCOPE FOR TOMORROW </h1>
+        <div class="row">
+            {% for tomnh1 in tomo_normal_horo1 %}
+            <div class="col-md-2">
+                <div class="card-body" style="max-width: 18rem;">
+                    <p align="center"><img src="{{ tomnh1.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+                    <div>
+                    <p class="card-title" align="center">{{ tomnh1.zodiac }} {{ tomnh1.category }} Horoscope </p>
+                    <p class="card-text" align="center">for {{ tomnh1.date }}</p>
+                    <p align="center"><a href="{% url 'viewdailyhoroscope' tomnh1.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            {% for tomnh2 in tomo_normal_horo2 %}
+            <div class="col-md-2">
+                <div class="card-body" style="max-width: 18rem;">
+                    <p align="center"><img src="{{ tomnh2.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+                    <div>
+                        <p class="card-title" align="center">{{ tomnh2.zodiac }} {{ tomnh2.category }} Horoscope </p>
+                        <p class="card-text" align="center">for {{ tomnh2.date }}</p>
+                        <p align="center"><a href="{% url 'viewdailyhoroscope' tomnh2.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>    
+    </section>
+    <hr>
+    <section>
+        <h1 align="center"> WEEKLY HOROSCOPE</h1>  
+        <div class="row">
+            {% for swh1 in sim_week_horo1 %}
+            <div class="col-md-2">
+                <div class="card-body" style="max-width: 18rem;">
+                    <p align="center"><img src="{{ swh1.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+                    <div>
+                        <p class="card-title" align="center">{{ swh1.zodiac }} {{ swh1.category }} Horoscope </p>
+                        <p class="card-text" align="center">For {{ swh1.from_date}} To {{ swh1.to_date }}</p>
+                        <p align="center"><a href="{% url 'viewweeklyhoroscope' swh1.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            {% for swh2 in sim_week_horo2 %}
+            <div class="col-md-2">
+                <div class="card-body" style="max-width: 18rem;">
+                    <p align="center"><img src="{{ swh2.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+                    <div>
+                        <p class="card-title" align="center">{{ swh2.zodiac }} {{ swh2.category }} Horoscope </p>
+                        <p class="card-text" align="center">For {{ swh2.from_date}} To {{ swh2.to_date }}</p>
+                        <p align="center"><a href="{% url 'viewweeklyhoroscope' swh2.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+                    </div>
+                </div>
+            </div>
+          {% endfor %}
+        </div>
+    </section>
+    <hr>
+    <section>
+        <h1 align="center"> MONTHLY HOROSCOPE</h1>  
+        <div class="row">
+            {% for smh1 in sim_month_horo1 %}
+            <div class="col-md-2">
+                <div class="card-body" style="max-width: 18rem;">
+                    <p align="center"><img src="{{ smh1.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+                    <div>
+                        <p class="card-title" align="center">{{ smh1.zodiac }} {{ smh1.category }} Horoscope </p>
+                        <p class="card-text" align="center">For {{ smh1.month }}</p>
+                        <p align="center"><a href="{% url 'viewmonthlyhoroscope' smh1.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            {% for smh2 in sim_month_horo2 %}
+            <div class="col-md-2">
+                <div class="card-body" style="max-width: 18rem;">
+                    <p align="center"><img src="{{ smh2.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+                    <div>
+                        <p class="card-title" align="center">{{ smh2.zodiac }} {{ smh2.category }} Horoscope </p>
+                        <p class="card-text" align="center">For {{ smh2.month }}</p>
+                        <p align="center"><a href="{% url 'viewmonthlyhoroscope' smh2.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <hr>
+    <section>
+        <h1 align="center"> YEARLY HOROSCOPE</h1>
+        <div class="row">
+            {% for syh1 in sim_year_horo1 %}
+            <div class="col-md-2">
+                <div class="card-body" style="max-width: 18rem;">
+                    <p align="center"><img src="{{ syh1.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+                    <div>
+                        <p class="card-title" align="center">{{ syh1.zodiac }} {{ syh1.category }} Horoscope </p>
+                        <p class="card-text" align="center">For {{ syh1.year }}</p>
+                        <p align="center"><a href="{% url 'viewyearlyhoroscope' syh1.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            {% for syh2 in sim_year_horo2 %}
+            <div class="col-md-2">
+                <div class="card-body" style="max-width: 18rem;">
+                    <p align="center"><img src="{{ syh2.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+                    <div>
+                        <p class="card-title" align="center">{{ syh2.zodiac }} {{ syh2.category }} Horoscope </p>
+                        <p class="card-text" align="center">For {{ syh2.year }}</p>
+                        <p align="center"><a href="{% url 'viewyearlyhoroscope' syh2.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endblock %}

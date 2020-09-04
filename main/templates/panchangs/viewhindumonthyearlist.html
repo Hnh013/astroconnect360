@@ -1,0 +1,75 @@
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+
+<hr><hr><hr><hr><hr><hr>
+<hr>
+<h1 align="center">Hindu Month Year</h1>
+<hr>
+<div class="jumbotron">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+	  <a href="{% url 'dashboard'%}" class="btn btn-success"><< Go To Dashbboard</a>
+    
+	  <a href="{% url 'createhindumonthyear'%}" class="btn btn-primary">Create Hindu Month Year</a><br><br>
+    </div> 
+   <div class="col-sm-6">
+        <p align="center">
+        <br>
+     <a href="{% url 'viewdailypanchanglist' %}" class="btn btn-outline-primary btn-sm ">Create/Edit Panchang</a>
+     <a href="{% url 'viewdailysolarcyclelist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Daily Solar Cycle</a>
+     <a href="{% url 'viewdailytimingslist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Daily Timings</a>
+     
+     </p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+
+  	<div class="col-sm-12">
+
+  		
+     <table class="table table-striped table-sm">
+     	<tr>
+        <th>S.No</th>
+        <th>Writer</th>
+        <th>date</th>
+        <th>Shaka Samwat</th>
+        <th>Vikram Samwat</th>
+        <th>Month Amanta</th>
+        <th>Month Purnimanta</th>
+        <th></th>
+        <th></th>
+      </tr>
+     	{% for dh in hindu_month_year %}
+     	<tr>
+     		<td>{{dh.id}}</td>
+     		<td>{{dh.astroprofile}}</td>
+     		<td>{{dh.date}}</td>
+     		<td>{{dh.shakasamwat}}</td>
+     		<td>{{dh.vikramsamwat}}</td>
+        <td>{{dh.monthamanta}}</td>
+        <td>{{dh.monthpurnimanta}}</td>
+     		<td><a href="{% url 'edithindumonthyear' dh.id %}" class="btn btn-warning btn-sm">Edit Hindu Month Year</a></td>
+     		<td><a href="{% url 'deletehindumonthyear' dh.id %}" class="btn btn-danger btn-sm">Delete Hindu Month Year</a></td>
+     	</tr>
+     	{% endfor %}
+
+
+     </table>
+  	</div>
+  	
+  
+
+     
+  	
+  </div>
+</div>
+
+
+{% endblock %}

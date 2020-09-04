@@ -1,0 +1,321 @@
+{% extends 'templating.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+	<!-- =========================== Card ============================================ -->
+	<section class="cta center-bg pt-80 " style="background: url({% static 'img/banner_image.jpg' %})no-repeat">
+		<div class="finding-overlay op-70"></div>
+		<div class="container pt-80">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-10">
+					<div class="cta-sec text-center">
+						<h1>When will I find the right partner?</h1>
+						<p>No payment required, jump to get started.</p>
+						<a href="{% url 'astrosearch' %}" class="btn btn-cta">Talk to Astrologers</a>
+					</div>
+				</div>
+			</div>
+		</div>		
+	</section>
+	<div class="container">
+		<div class="card card-shadow" style="width: 100%;">
+			<div class="card-body py-0">
+			  	<div class="row">
+					<div class="col-lg-3 px-4 py-3">
+						<p class="h5">Sign Up for Free & Consult your favorite Astrologer</p>
+					</div>
+					<div class="col-lg-9 card-form px-lg-5 pt-4 pb-2">
+						<div class="form-group my-auto">
+							<form action="{% url 'phoneverify' %}" method="POST">
+								{% csrf_token %}
+								<div class="row">
+									<input type="text" class="form-control form-small col-1 mr-2" value="+91">
+									<input type="text" class="form-control form-small col-6 mr-2" value="" placeholder="Mobile No" name="phn" id="phn">
+									<input class="btn theme-btn w-100 font-14 signup-btn col-4" type="submit" name="SignUp" value='Sign Up'>
+									<p class="font-14 text-center"><small>Already Registered? <a href="#" class="link">Login</a></small></p>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- =========================== Different Kundali ============================================ -->
+	<section>
+		<div class="container p-sm">
+			<p class="h1 text-center">FREE DAILY <span class="section-heading">HOROSCOPES</span></p>
+			<div class="row mt-5">
+				<div class="col-lg-1 col-4">
+					<a href="{% url 'viewtodayhoroscope' 'Aries' %}" class="horoscope"><img src="{% static 'img/horoscopes/aries.svg' %}" width="60px" class="d-block mx-auto" alt="Aries">
+						<span class="text-center d-block mt-3">Aries</span>
+					</a>
+				</div>
+				<div class="col-lg-1 col-4">
+					<a href="{% url 'viewtodayhoroscope' 'Taurus' %}" class="horoscope"><img src="{% static 'img/horoscopes/taurus.svg' %}" width="60px" class=" d-block mx-auto" alt="">
+						<span class="text-center d-block mt-3">Tauras</span>
+					</a>
+				</div>
+				<div class="col-lg-1 col-4">
+					<a href="{% url 'viewtodayhoroscope' 'Gemini' %}" class="horoscope"><img src="{% static 'img/horoscopes/gemini.svg' %}" width="60px" class=" d-block mx-auto" alt="">
+						<span class="text-center d-block mt-3">Gemini</span>
+					</a>
+				</div>
+				<div class="col-lg-1 col-4">
+					<a href="{% url 'viewtodayhoroscope' 'Cancer' %}" class="horoscope"><img src="{% static 'img/horoscopes/cancer.svg' %}" width="60px" class=" d-block mx-auto" alt="">
+						<span class="text-center d-block mt-3">Cancer</span>
+					</a>
+				</div>
+				<div class="col-lg-1 col-4">
+					<a href="{% url 'viewtodayhoroscope' 'Leo' %}" class="horoscope"><img src="{% static 'img/horoscopes/leo.svg' %}" width="60px" class=" d-block mx-auto" alt="">
+						<span class="text-center d-block mt-3">Leo</span>
+					</a>
+				</div>
+				<div class="col-lg-1 col-4">
+					<a href="{% url 'viewtodayhoroscope' 'Virgo' %}" class="horoscope"><img src="{% static 'img/horoscopes/virgo.svg' %}" width="60px" class=" d-block mx-auto" alt="">
+						<span class="text-center d-block mt-3">Virgo</span>
+					</a>
+				</div>
+				<div class="col-lg-1 col-4">
+					<a href="{% url 'viewtodayhoroscope' 'Libra' %}" class="horoscope"><img src="{% static 'img/horoscopes/libra.svg' %}" width="60px" class=" d-block mx-auto" alt="">
+						<span class="text-center d-block mt-3">Libra</span>
+					</a>
+				</div>
+				<div class="col-lg-1 col-4">
+					<a href="{% url 'viewtodayhoroscope' 'Scorpio' %}" class="horoscope"><img src="{% static 'img/horoscopes/scorpio.svg' %}" width="60px" class=" d-block mx-auto" alt="">
+						<span class="text-center d-block mt-3">Scorpio</span>
+					</a>
+				</div>
+				<div class="col-lg-1 col-4">
+					<a href="{% url 'viewtodayhoroscope' 'Sagittarius' %}" class="horoscope"><img src="{% static 'img/horoscopes/sagittarius.svg' %}" width="60px" class=" d-block mx-auto" alt="">
+						<span class="text-center d-block mt-3">Sagittarius</span>
+					</a> 
+				</div>
+				<div class="col-lg-1 col-4">
+					<a href="{% url 'viewtodayhoroscope' 'Capricorn' %}" class="horoscope"><img src="{% static 'img/horoscopes/capricorn.svg' %}" width="60px" class=" d-block mx-auto" alt="">
+						<span class="text-center d-block mt-3">Capricorn</span>
+					</a>
+				</div>
+				<div class="col-lg-1 col-4">
+					<a href="{% url 'viewtodayhoroscope' 'Aquarius' %}" class="horoscope"><img src="{% static 'img/horoscopes/aquarius.svg' %}" width="60px" class=" d-block mx-auto" alt="">
+						<span class="text-center d-block mt-3">Aquarius</span>
+					</a>
+				</div>
+				<div class="col-lg-1 col-4">
+					<a href="{% url 'viewtodayhoroscope' 'Pisces' %}" class="horoscope"><img src="{% static 'img/horoscopes/pisces.svg' %}" width="60px" class=" d-block mx-auto" alt="">
+						<span class="text-center d-block mt-3">Pisces</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<!-- =========================== ONLINE ASTROLOGERS ============================================ -->
+	<section>
+		<div class="container p-sm mt-5">
+			<p class="h1 text-center">ONLINE <span class="section-heading">ASTROLOGERS</span></p>
+			<hr class="w-100">
+			<div class="row mt-5 font-3 steps-box border">
+				<div class="col-md-3 col-sm-6 col-12 ">
+					<div class="contact-steps mx-auto w-50">
+						<img src="{% static 'img/contactProcedure/person.svg' %}" width="40px" class="d-block mx-auto" alt="Person">
+					</div>
+					<div class="text-center">
+						<p class="mt-4 font-weight-bold">1. Sign Up</p>
+						<p class="text-secondary">with Horoscope</p>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-12">
+					<div class="contact-steps mx-auto w-50">
+						<img src="{% static 'img/contactProcedure/pay.svg' %}" width="40px" class="d-block mx-auto" alt="Person">
+					</div>
+					<div class="text-center">
+						<p class="mt-4">2. Put money in your</p>
+						<p class="text-secondary font-weight-bold">with Horoscope</p>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-12">
+					<div class="contact-steps mx-auto w-50">
+						<img src="{% static 'img/contactProcedure/businessman.svg' %}" width="40px" class="d-block mx-auto" alt="Person">
+					</div>
+					<div class="text-center">
+						<p class="mt-4"><span class="font-weight-bold">3. Click on</span> to <span class="font-weight-bold">call</span> and add to <span class="font-weight-bold">chat</span>
+						</p>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-12">
+					<div class="contact-steps mx-auto w-50">
+						<img src="{% static 'img/contactProcedure/thumbs-up.svg' %}" width="40px" class="d-block mx-auto" alt="Person">
+					</div>
+					<div class="text-center">
+						<p class="mt-4"><span class="font-weight-bold">4. Rate & Review</span> astrologer </p>
+						<p class="">after consultation</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="list-grid-layout classical-layout">
+						{% for order in order_page_obj %}
+						<div class="grid-layout-body">
+							<div class="gl-list-author">
+								<a data-toggle="tooltip" data-original-title="{{ order.profile }}" href="{% url 'astrodetail' order.id %}"><img src="{{ order.profile.profile_pic.url }}" alt="astro-nageswara"></a>
+							</div>
+							<div class="gl-list-caption">
+								<h4><a href="{% url 'astrodetail' order.id %}" class="list-title">{{ order.profile }}</a></h4>
+								<p class="gl-tagline"><img src="{% static 'img/astrologers/language.svg' %}" width="20px;"> {{ order.language }}</p>
+								<p class="gl-tagline"><img src="{% static 'img/astrologers/achivment.svg' %}" width="20px;"> {{ order.skill }}</p>
+								<p class="gl-tagline"><img src="{% static 'img/astrologers/location.svg' %}" width="20px;"> {{ order.location }}</p>
+							</div>
+						</div>
+						<div class="grid-layout-footer">
+							<div class="ft-loke">
+								<i class="fas fa-rupee-sign" width="10px;"></i> 12/Min<br>
+								<i class="fas fa-graduation-cap" width="10px;"></i> {{ order.experience }} Year
+							</div>
+							<div class="box">
+
+								<div class="cat-icon-box rounded-circle cbg-5">
+									<i class="fas fa-phone-volume cbg-9"></i>
+									{% if user.is_authenticated %}
+									<a href="{% url 'calling' request.user.profile.phone order.profile.phone %}"></a>
+									{% endif %}
+								</div>
+								<div class="cat-icon-box rounded-circle cbg-8">
+									<i class="fas fa-comment-dots cbg-9"></i>
+									{% if user.is_authenticated %}
+									<a href="{% url 'consult' order.profile.user.username %}"></a>
+									{% endif %}
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>		
+	</section>		
+
+<section>
+	<div class="card-deck">
+  <div class="card" style=" background-color: #aaaaaa; border-radius: 5px 25px; border-color: #ff7600; border-width: 3px;">
+    <div class="card-body">
+      <h5 class="card-title" style="text-align: center; background-color: #ffffff;border-radius: 500px; ">Horoscopes 2020</h5>
+      <p class="card-text" ><a href="">View all horoscopes for today</a><br>
+      	<a href="">Get your personalized horoscope</a><br>
+      	<a href="">View Tarot predictions for this year</a><br>
+      	<a href="{% url 'lovehoroscope' %}">View Love horoscopes</a><br>
+      	<a href="{% url 'healthhoroscope' %}">View Health horoscopes</a><br>
+      </p>
+    </div>
+  
+  </div>
+  <div class="card" style="background-color: #aaaaaa; border-radius: 5px 25px; border-color: #ff7600; border-width: 3px;">
+    
+    <div class="card-body">
+      <h5 class="card-title"style="text-align: center; background-color: #ffffff;border-radius: 500px ;">Kundli</h5>
+      <p class="card-text"><a href="{% url 'createkundli' %}">Get your Kundli</a><br>
+                           <a href="">Match Kundlis</a><br>
+                           
+      </p>
+    </div>
+  </div>
+  <div class="card" style=" background-color: #aaaaaa; border-radius: 5px 25px; border-color: #ff7600; border-width: 3px">
+    <div class="card-body" >
+      <h5 class="card-title" style="text-align: center; background-color: #ffffff;border-radius: 500px;">Panchang</h5>
+      <p class="card-text">
+      	<a href="">View Panchang for today</a><br>
+      	<a href="">View Hindu Month Year for today</a><br>
+      	<a href="">View Solar Cycle for today</a><br>
+      	<a href="">View Rahu Kaal for today</a><br>
+      	<a href="">Knoe your Moon sign</a><br>
+      	<a href="">Know the Shubh Muhurat for today</a><br>
+      	<a href="">Know your Guna Dosha</a><br>
+      	
+      </p>
+    </div>
+    
+  </div>
+</div>
+</section>
+
+<section>
+	<div class="card-deck" >
+  <div class="card" style=" background-color: #aaaaaa; border-radius: 5px 25px; border-color: #ff7600; border-width: 3px">
+    <div class="card-body" >
+      <h5 class="card-title" style="text-align: center; background-color: #ffffff;border-radius: 500px;">Love</h5>
+      <p class="card-text">
+      	<a href="">Check Love compatibility</a><br>
+      	<a href="">Check Your Love Horoscope</a><br>
+      	<a href="">Get Your Love Tarot Reading</a><br>
+      	<a href="">Sample Love Article</a><br>
+
+
+      </p>
+    </div>
+    
+  </div>
+  <div class="card" style=" background-color: #aaaaaa; border-radius: 5px 25px; border-color: #ff7600; border-width: 3px">
+    
+    <div class="card-body">
+      <h5 class="card-title" style="text-align: center; background-color: #ffffff;border-radius: 500px;">Festivals 2020</h5>
+      <p class="card-text">
+        <a href="">Festival One 2020</a><br>
+      	<a href="">Festival Two 2020</a><br>
+      	<a href="">Festival Three 2020</a><br>
+      </p>
+    </div>
+    
+  </div>
+  <div class="card" style=" background-color: #aaaaaa; border-radius: 5px 25px; border-color: #ff7600; border-width: 3px">
+    <div class="card-body" >
+      <h5 class="card-title" style="text-align: center; background-color: #ffffff;border-radius: 500px; ">Chinese Astrology</h5>
+      <p class="card-text">
+      	  <a href="">Chinese Love compatibility</a><br>
+      	<a href="">Sample astrology article</a><br>
+      	<a href="">Sample astrology article</a><br>
+      </p>
+    </div>
+    
+  </div>
+</div>
+</section>
+
+
+<section>
+<h1 align="center"><a link href="">AstroConnect360 Blog</a></h1>
+	<div class="jumbotron" style="border-radius: 50px 15px 5px 30px;">
+  <div class="container">
+          <div class="owl-carousel" id="list-slide">
+
+
+                    {% for post in posts %}
+                    <div>
+                        <div class="cards" >
+                            <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
+                                <div class="col p-4 d-flex flex-column position-static" >
+                                    <h3 class="my-1"><a href="{% url 'detailview' post.slug %}">{{post.title}}</a></h3>
+                                    <div style="display:flex">
+                                        {% for tag in post.tags.all %}
+                                        <a href="{% url 'tagged' tag.slug %}" class="mr-1 badge badge-info">{{ tag }}</a>
+                                        {% endfor %}
+                                    </div>
+                                    <p class="mb-auto">{{post.description|truncatechars:300}}</p>
+                                    <p class="mb-auto text-muted">{{post.published}}</p>
+                                </div>
+                            </div>
+                        </div>       
+                    </div>
+                    {% endfor %}
+</div>
+</div>
+</div>
+</section>
+
+	{% endblock %}

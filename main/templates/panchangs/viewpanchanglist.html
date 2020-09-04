@@ -1,0 +1,82 @@
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+
+<hr><hr><hr><hr><hr><hr>
+<hr>
+<h1 align="center">Daily Panchangs</h1>
+<hr>
+<div class="jumbotron">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+	  <a href="{% url 'dashboard'%}" class="btn btn-success"><< Go To Dashbboard</a>
+    
+	  <a href="{% url 'createdailypanchang'%}" class="btn btn-primary">Create Panchang</a><br><br>
+    </div> 
+   <div class="col-sm-6">
+        <p align="center">
+        <br>
+     <a href="{% url 'viewdailysolarcyclelist' %}" class="btn btn-outline-primary btn-sm ">Create/Edit Solar Cycle</a>
+     <a href="{% url 'viewhindumonthyearlist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Hindu Month Year</a>
+     <a href="{% url 'viewdailytimingslist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Daily Timings</a>
+     
+     </p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+
+  	<div class="col-sm-12">
+
+  		
+     <table class="table table-striped table-sm">
+     	<tr>
+        <th>S.No</th>
+        <th>Writer</th>
+        <th>date</th>
+        <th>Tithi</th>
+        <th>Nakshatra</th>
+        <th>Karana</th>
+        <th>Paksha</th>
+        <th>Yoga</th>
+        <th>Yoga Till</th>
+        <th>Day</th>
+        <th></th>
+        <th></th>
+      </tr>
+     	{% for dh in daily_panchang %}
+     	<tr>
+     		<td>{{dh.id}}</td>
+     		<td>{{dh.astroprofile}}</td>
+     		<td>{{dh.date}}</td>
+     		<td>{{dh.nakshatra}}</td>
+     		<td>{{dh.karana}}</td>
+        <td>{{dh.paksha}}</td>
+        <td>{{dh.yoga}}</td>
+        <td>{{dh.yoga_till}}</td>
+        <td>{{dh.day}}</td>
+     		<td><a href="{% url 'editdailypanchang' dh.id %}" class="btn btn-warning btn-sm">Edit Panchang</a></td>
+     		<td><a href="{% url 'deletedailypanchang' dh.id %}" class="btn btn-danger btn-sm">Delete Panchang</a></td>
+     	</tr>
+     	{% endfor %}
+
+
+     </table>
+  	</div>
+  	
+  
+
+     
+  	
+  </div>
+</div>
+
+
+
+
+{% endblock %}

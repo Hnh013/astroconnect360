@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- this page shows the customer screen just a single form to request a meet with astrologer
+      Also shows requests by the customer --------- -->
+
+	<title></title>
+	
+		<script type="text/javascript"src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script>
+
+// script to reload page after every second but not working		
+	 $(document).ready(
+            function() {
+                setInterval(function() {
+                    type: 'GET',
+                    url: '/chat/appt/',
+                    success: function() {}
+                }, 1000);
+            });
+        </script>
+</head>
+<body>
+
+<div id="show" align="center"></div>
+ 
+    <div align="center">
+        <p>
+            
+        </p>
+
+
+
+Hello {{ user.username }}
+
+<!--  Showing request made by customer will show only the latest one -->
+
+Your requests:
+<table>
+
+<!--  here using the reply of astrologer as the object because it contains appointment as foreign key
+
+this appears after astrologer has replied to customer request -->	
+{% for apptrpl in apptrpls %}
+<tr>
+  <td>{{ apptrpl.appointment.id }}</td>
+  <td>{{ apptrpl.appointment.astrologer }}</td>
+  <td>{{ apptrpl.appointment.time_created }}  </td>
+  <td>{{ apptrpl.appointment.status }}</td>
+  <td>{{ apptrpl.time_accept }}</td>
+  <td>{{ apptrpl.room_name }}</td>
+
+<!---- this link takes customer to the room ----->
+
+  <td><a class="button" href="{% url 'showchat' apptrpl.room_name user.username %}">Go</a></td>
+</tr>
+{% endfor %}
+</table>
+
+<!--  appointmwnt formm -->
+
+plz choose the astrologer below to make an chat appointment request
+
+
+<form method="POST">
+	{% csrf_token %}
+	{{ form.as_p }}
+	<button type="submit">Submit</button>
+</form>
+</div>
+</body>
+</html>

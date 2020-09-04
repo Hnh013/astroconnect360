@@ -1,0 +1,76 @@
+
+{% extends 'templating.html' %}
+
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+
+<hr><hr><hr><hr><hr><hr><hr>
+
+<div class="jumbotron">
+	<h1 align="center">PALM READING</h1><br><hr>
+<div class="container">
+<div class="row">
+  <div class="col-md-8">
+<p>
+  The tarot (/ˈtæroʊ/, first known as trionfi and later as tarocchi or tarock) is a pack of playing cards, used from the mid-15th century in various parts of Europe to play games such as Italian tarocchini, French tarot and Austrian Königrufen, many of which are still played today. In the late 18th century, some tarot decks began to be used for divination via tarot card reading and cartomancy leading to custom decks developed for such occult purposes.[1]
+<br><br>
+Like common playing cards, the tarot has four suits which vary by region: French suits in Northern Europe, Latin suits in Southern Europe, and German suits in Central Europe. Each suit has 14 cards: ten pip cards numbering from one (or Ace) to ten, and four face cards (King, Queen, Knight, and Jack/Knave/Page). In addition, the tarot has a separate 21-card trump suit and a single card known as the Fool. Depending on the game, the Fool may act as the top trump or may be played to avoid following suit.[2] These tarot cards are still used throughout much of Europe to play conventional card games without occult associations.
+<br><br>
+Among English-speaking countries where these games are not played frequently, tarot cards are used primarily for novelty and divinatory purposes, usually using specially designed packs.[2] Some occult enthusiasts claim that tarot has esoteric links to ancient Egypt, the Kabbalah, Indian Tantra, or the I Ching, though no documented evidence of such origins or of the usage of tarot for divination before the 18th century has been demonstrated to a scholarly standard
+<br><br>
+</p>
+
+</div>
+<div class="col-md-4">
+
+<h3 align="center">Palm Reading To know your past, present and future...</h3>
+<hr>
+<br><br>
+<div class="card" style="background-color: #dddddd;">
+<form method="POST">
+
+  {% csrf_token %}
+  <table>
+
+  <tr>
+    <td><h6>{{ form.name.label }}</h6></td>
+  </tr>
+  <tr>
+    <td>{{ form.name}}</td>
+  </tr>	
+
+  <tr>
+    <td><h6>{{ form.left_palm.label }}</h6></td>
+  </tr>
+  <tr>
+    <td>{{ form.left_palm}}</td>
+  </tr>
+  <tr>
+    <td><h6>{{ form.right_palm.label }}</h6></td>
+  </tr>
+  <tr>
+    <td>{{ form.right_palm}}</td>
+  </tr>
+  
+  <tr>
+    <td><input type="submit" value="Read My Palm" class="btn btn-primary" style="border-radius: 500px;"></td>
+  </tr>
+  </table>
+</form>
+</div>
+  </div>
+
+</div></div></div>
+<br><Br><Br>
+
+
+
+
+
+
+
+         
+{% endblock %}

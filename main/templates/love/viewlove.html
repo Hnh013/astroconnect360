@@ -1,0 +1,72 @@
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+    <section class="page-title-banner" style="background-image:url({% static 'img/banner_image.jpg' %});">
+        <div class="container">
+            <div class="row m-0 align-items-end detail-swap">
+                <div class="tr-list-wrap">
+                    <div class="tr-list-detail">
+                        <div class="tr-list-thumb">
+                            <img src="{% static 'img/love.png' %}" class="img-responsive" alt="Love">
+                        </div>
+                        <div class="tr-list-info">
+                            <h4>Love<hr></h4>
+                        </div>
+                    </div>
+                    <div class="listing-detail_right">
+                        <div class="listing-detail-item">
+                            <a href="javascript:void(0)" data-toggle="modal" data-target="#add-review" class="btn btn-list">Home / Love</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="container"> 
+            <h1 align="center">LOVE & ASTROLOGY</h1>
+            <p align="justify">You know what the best thing in the world is? Not chocolate, bacon, a trip to Paris, or being kiss-attacked by a pack of pug puppies.<br>
+            It’s more intoxicating than any red wine, more amorous than a dozen raw oysters, and it makes you feel like you’re literally floating on clouds.<br><br>
+            Love is so powerful it makes you do crazy things — like getting married. Numerous times. Like I did.                
+            But as many times as I have been married, I have had my heart broken even more. That’s the thing about love. It’s so powerful that when it’s taken away from you, it’s devastating.<br><br>
+            It makes you do even crazier things. Hence, the television program Snapped. Whenever I watch that show, I think, “I feel you, sister!”
+            So, it’s important to know everything you can about a man (or woman) before you get involved with them, including their sign.
+            They don’t say their love was written in the stars for no reason, honey.<br><br>
+            Finding out which signs are your perfect match is key, in my opinion. I once dated a Taurus…also two Virgos, a Scorpio, a Cancer, three Pisces, and an Aries. And all those men were wrong, wrong, <i>wrong</i> for me. But now I’m dating a Gemini and things are light and breezy and perfect.
+            Want to fall in love in 2020? Find out your perfect match according to astrology. You want to make sure you’re making the best possible decision for yourself. So knowing this information is downright practical.
+            I did and I couldn’t be happier!</p>
+            <p align="center"><a href="{% url 'checklove' %}" class="btn btn-primary btn-block">Check Your Love Compatibility Now!</a></p>
+        </div>
+    </section>
+    <hr>
+    <section>
+        <div class="jumbotron">
+            <h2 align="center">LOVE BLOGS </h2>
+            <div class="container">
+                <div class="row mb-2 posts">
+                    {% for post in posts %}
+                    <div class="col-md-6">
+                        <div class="cards">
+                            <div class="row no-gutters border rounded  flex-md-row mb-4 shadow-sm h-md-250">
+                                <div class="col p-4 d-flex flex-column position-static">
+                                    <h3 class="my-1"><a href="{% url 'detailview' post.slug %}">{{post.title}}</a></h3>
+                                    <div style="display:flex">
+                                        {% for tag in post.tags.all %}
+                                        <a href="{% url 'tagged' tag.slug %}" class="mr-1 badge badge-info">{{ tag }}</a>
+                                        {% endfor %}
+                                    </div>
+                                    <p class="mb-auto">{{post.description|truncatechars:400}}</p>
+                                    <p class="mb-auto text-muted">{{post.published}}</p>
+                                </div>
+                            </div>
+                        </div>       
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,33 @@
+
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+<br><br><br><br>
+<hr><hr>
+
+<p text-align="center"><h1> Sign Up, It's Free ! </h1></p>
+  <form method="post"  action="{% url 'otpverify' %}">
+      {% csrf_token %}
+      <div class="jumbotron">
+      <div class="row">
+          <div class="col-6">
+            <h6><label for="phn">Your Phone number :</label></h6>               
+             Number : <input type="text" name="phn" id="phn" value="{{phn}}" reaedonly>
+          </div>
+          <div class="col-6">
+            <h6><label for="enter_otp">Enter OTP sent to your number :</label></h6>   
+                    <input type="text" name="enter_otp" id="enter_otp">
+                    <input type="text" name="verify_otp" id="verify_otp" value="{{otp}}">
+          </div>
+      </div>
+      </div>
+          <p align="center">
+               <button type="submit" class='btn btn-success'>Verify OTP!</button>
+          </p>
+
+  </form> 
+
+	{% endblock %}

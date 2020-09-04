@@ -1,0 +1,70 @@
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+
+<hr><hr><hr><hr><hr><hr>
+
+
+
+<section>
+<div class="container">
+<div class=row>
+
+	<div class="col-sm-2"> 
+  </div>
+
+  <div class="col-sm-8">
+	
+  <div>
+  {% for h in horoscope %}
+  <p align="center"><img src="{{ h.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+  <div>
+    <p align="center"><h6 align="center">{{ h.zodiac }} {{ h.category }} Horoscope </h6></p>
+    <p align="center"><h6 align="center">for {{ h.date }}</h6></p>
+    <p>{{ h.content }}</p>
+  </div>
+  </div>
+    {% endfor %}
+  </div>
+  </div>
+
+  <div class="col-sm-2">
+  </div>
+
+
+
+</div>
+</section>
+
+<section>
+  <hr><h1 align="center">More {{ sim_zodi }} Horoscopes for {{ today_date }}</h1><hr>
+  <div class="container">
+    <div class="row">
+      
+        {% for h1 in h_horoscope %}
+        <div class="col-sm-4">
+        <div class="card-body" style="max-width: 18rem;">
+         <p align="center"><img src="{{ h1.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+          <div>
+            <p class="card-title" align="center">{{ h1.zodiac }} {{ h1.category }} Horoscope </p>
+            <p class="card-text" align="center">for {{ h1.date }}</p>
+            <p class="card-text" align="center">for {{ h1.content|truncatechars:200 }}</p>
+            <p align="center"><a href="{% url 'viewdailyhoroscope' h1.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+          </div>
+        </div>
+      </div>
+       {% endfor %}
+      
+
+      
+
+      
+
+
+    </div>
+  </div>
+</section>
+{% endblock %}

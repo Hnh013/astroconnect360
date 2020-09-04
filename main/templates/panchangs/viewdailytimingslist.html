@@ -1,0 +1,83 @@
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+
+<hr><hr><hr><hr><hr><hr>
+<hr>
+<h1 align="center">Daily Timings</h1>
+<hr>
+<div class="jumbotron">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+	  <a href="{% url 'dashboard'%}" class="btn btn-success"><< Go To Dashbboard</a>
+    
+	  <a href="{% url 'createdailytimings'%}" class="btn btn-primary">Create daily Timings</a><br><br>
+    </div> 
+   <div class="col-sm-6">
+        <p align="center">
+        <br>
+     <a href="{% url 'viewdailypanchanglist' %}" class="btn btn-outline-primary btn-sm ">Create/Edit Panchang</a>
+     <a href="{% url 'viewdailysolarcyclelist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Daily Solar Cycle</a>
+     <a href="{% url 'viewhindumonthyearlist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Hindu Month Year</a>
+     
+     </p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+
+  	<div class="col-sm-12">
+
+  		
+     <table class="table table-striped table-sm">
+     	<tr>
+        <th>S.No</th>
+        <th>Writer</th>
+        <th>date</th>
+        <th>Rahu From</th>
+        <th>Rahu To</th>
+        <th>Yama From</th>
+        <th>Yama To</th>
+         <th>Gulika From</th>
+        <th>Gulika To</th>
+        <th>Abhi From</th>
+        <th>Abhi To</th>
+        <th></th>
+        <th></th>
+      </tr>
+     	{% for dh in daily_timings %}
+     	<tr>
+     		<td>{{dh.id}}</td>
+     		<td>{{dh.astroprofile}}</td>
+     		<td>{{dh.date}}</td>
+     		<td>{{dh.rahu_from}}</td>
+     		<td>{{dh.rahu_to}}</td>
+        <td>{{dh.gulika_from}}</td>
+        <td>{{dh.gulika_to}}</td>
+        <td>{{dh.yama_from}}</td>
+        <td>{{dh.yama_to}}</td>
+        <td>{{dh.abhi_from}}</td>
+        <td>{{dh.abhi_to}}</td>
+     		<td><a href="{% url 'editdailytimings' dh.id %}" class="btn btn-warning btn-sm">Edit Daily Timings</a></td>
+     		<td><a href="{% url 'deletedailytimings' dh.id %}" class="btn btn-danger btn-sm">Delete Daily Timings</a></td>
+     	</tr>
+     	{% endfor %}
+
+
+     </table>
+  	</div>
+  	
+  
+
+     
+  	
+  </div>
+</div>
+
+
+{% endblock %}

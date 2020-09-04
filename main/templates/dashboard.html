@@ -1,0 +1,160 @@
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+
+<style>
+    .profile{
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 50%;
+        margin: 0 auto;
+    }
+
+</style>
+
+
+<br><br><br><Br>
+
+{% if user.is_authenticated %}
+    {% if user.profile.user_role == 'Customer' or user.profile.user_role == 'Astrologer' %}
+
+    
+
+{% if user.profile.user_role == 'Astrologer' %}
+<hr><h1 align="center">Appointments</h1><hr>
+<div class = "jumbotron">
+<div class="container">
+  <div class="row">
+    <table class="table table-dark table-sm">
+    <tr><th>Customer</th><th>Astrologer</th><th>Room Number</th><th>Room Link</th></tr>
+    {% for r in Req %}
+    <tr>
+    <td><h6>{{ r.user }}</h6></td>
+    <td><h6>{{ r.astrologer }}</h6></td>
+    <td><h6>{{ r.room_name }}</h6></td>
+    <td><h6><a href="{% url 'astrochat' r.room_name %}">Go</a></h6></td></tr>
+    {% endfor %}
+  </table>
+</div></div>
+</div>
+
+
+<div class ="jumbotron">
+<div class="container">
+  <div class="row" >
+
+    
+{% if user.profile.astro_profile.skill == 'Horoscopic astrology' %}
+
+    <div class="col-md-3" style="background-color: white; text-align: center;">
+      <hr><h1 align="center">Horoscopes</h1><hr>
+      <br>
+      <a href="{% url 'viewdailyhoroscopelist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Daily Horoscopes</a>
+      <br><br>
+       <a href="{% url 'viewmonthlyhoroscopelist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Monthly Horoscopes</a>
+       <br><br>
+        <a href="{% url 'viewweeklyhoroscopelist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Weekly Horoscopes</a>
+       <br><br>
+        <a href="{% url 'viewyearlyhoroscopelist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Yearly Horoscopes</a>
+       <br><br>
+    </div>
+{% endif %}    
+    
+    <div class="col-md-3" style="background-color: white; text-align: center;">
+        <hr><h1 align="center">Panchangs</h1><hr>
+      <br>
+      <a href="{% url 'viewdailypanchanglist' %}" class="btn btn-outline-success btn-sm">Create/Edit Daily Panchangs</a>
+      <br><br>
+       <a href="{% url 'viewhindumonthyearlist' %}" class="btn btn-outline-success btn-sm">Create/Edit Hindu Month Year</a>
+       <br><br>
+        <a href="{% url 'viewdailysolarcyclelist' %}" class="btn btn-outline-success btn-sm">Create/Edit Daily Solar Cycle</a>
+       <br><br>
+        <a href="{% url 'viewdailytimingslist' %}" class="btn btn-outline-success btn-sm">Create/Edit Timings</a>
+       <br><br>
+      </div>
+
+    <div class="col-md-3" style="background-color: white; text-align: center;">
+     <hr><h1 align="center">Numerology</h1><hr>
+      <br>
+      <a href="{% url 'dailynumerologylist' %}" class="btn btn-outline-warning btn-sm">Create/Edit Daily Numerology</a>
+      <br><br>
+       <a href="{% url 'weeklynumerologylist' %}" class="btn btn-outline-warning btn-sm">Create/Edit Weekly Numerology</a>
+       <br><br>
+        <a href="{% url 'monthlynumerologylist' %}" class="btn btn-outline-warning btn-sm">Create/Edit Monthy Numerology</a>
+       <br><br>
+        <a href="{% url 'yearlynumerologylist' %}" class="btn btn-outline-warning btn-sm">Create/Edit Yearly Numerology</a>
+       <br><br>
+     </div>
+  
+    <div class="col-md-3" style="background-color: white; text-align: center;">
+     <hr><h1 align="center">Others</h1><hr>
+      <br>
+      <a href="{% url 'yearlytarotlist' %}" class="btn btn-outline-danger btn-sm">Create/Edit Yearly Tarot</a>
+      <br><br>
+       <a href="" class="btn btn-outline-danger btn-sm">Create/Edit Tarot Articles</a>
+       <br><br>
+        <a href="" class="btn btn-outline-danger btn-sm">Create/Edit Tarot Answers</a>
+       <br><br>
+        <a href="" class="btn btn-outline-danger btn-sm">Create/Edit Kudlis</a>
+       <br><br>
+     </div>
+
+
+
+  </div>
+   
+   </div>
+
+</div>
+</section>
+
+
+  <div class="jumbotron">
+    <div class="container">
+      <div class="row">
+        
+        <div class="col-sm-4" style="background-color:#fff; text-align: center">
+          <h2>Skills</h2> 
+			      <table class="table table-sm">
+               {{ user.profile.astro_profile.skill }} 			        
+			      </table>
+			  </div>
+			  
+        <div class="col-sm-4" style="background-color:#fff; text-align: center">
+          	   <h2>About</h2>
+          	   {{ user.profile.astro_profile.about }}
+        </div>
+			  
+        <div class="col-sm-4" style="background-color:#fff; text-align: center">
+          		<h2>languages</h2>			
+              <table class="table table-sm">
+									{% for i in user.profile.astro_profile.language %}
+									<tr><td>{{ i }}</td></tr>
+									{% endfor %}
+							</table>
+
+									
+			  </div>
+	    </div>
+	  </div>
+  </div>		
+
+<p align="center"><a class="btn btn-primary btn-sm" href="{% url 'createastroprofile' %}">Create Your Astrloger Profile</a></p>
+<p align="center"><a class="btn btn-warning btn-sm" href="{% url 'updateastroprofile' %}">Edit Your Astrloger Profile</a></p>
+
+{% endif %}
+{% else %}
+<hr><hr><hr><hr><hr><hr><hr>
+<div class="jumbotron">
+Hey {{ user.username }} Complete Your Profile <a href="{% url 'completeprofile' %}"><u>here</u></a>
+</div>			
+{% endif %}
+				
+    {% else %}
+    <h1>LOGIN FIRST!!</h1>
+    {% endif %}
+
+	{% endblock %}

@@ -1,0 +1,404 @@
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+    {% block content %}	
+    <br><br><br><br>
+
+{% if user.is_authenticated %}
+    {% if user.profile.user_role == 'Customer' or user.profile.user_role == 'Astrologer' %}
+
+   
+    <section class="gray p-0">
+		<div class="container-fluid">
+			
+			<div class="row">
+				<div class="dashboard-sidebar">
+					<div class="dashboard-avatar-detail">
+						<div class="ds-avatar-thumb">
+							<img src="{{user.profile.profile_pic.url}}" class="img-responsive" alt="">
+							<span class="ds-status online"></span>
+						</div>
+						<div class="ds-avatar-caption">
+                            <h4 class="ds-author-name">{{ user.username }}</h4>
+                            <span class="ds-author-location">Mail: {{ user.email }}</span>
+                            <a class="btn theme-btn font-14" href="{% url 'updateprofilepic' %}">Upload new Picture</a>
+						</div>
+					</div>
+					<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+						<a class="nav-link active" id="v-pills-wwallete-tab" data-toggle="pill" href="#wwallete" role="tab" aria-controls="wwallete" aria-selected="true" aria-expanded="true"><i class="ti-wallet"></i>Wallete</a>
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#profile" role="tab" aria-controls="profile" aria-selected="false" aria-expanded="false"><i class="ti-user"></i>Profile</a>
+						{% if user.profile.user_role == 'Astrologer' %}
+
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#editastroprofile" role="tab" aria-controls="editastroprofile" aria-selected="false" aria-expanded="false"><i class="ti-user"></i>Edit Astrologer Profile</a>
+
+						<a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#appointments" role="tab" aria-controls="appointments" aria-selected="false" aria-expanded="false"><i class="ti-user"></i>Appointments</a>
+						<a class="nav-link" id="v-pills-profile-tab"  data-toggle="pill" href="#astrology" role="tab" aria-controls="astrology" aria-selected="false" aria-expanded="false"><i class="ti-user"></i> Astrology</a>
+
+						{% endif %}
+						<a class="nav-link" id="v-pills-callhistory-tab" data-toggle="pill" href="#callhistory" role="tab" aria-controls="callhistory" aria-selected="false" aria-expanded="false"><i class="lni-phone-handset"></i>Call History</a>
+						<a class="nav-link" id="v-pills-chathistory-tab" data-toggle="pill" href="#chathistory" role="tab" aria-controls="chathistory" aria-selected="false" aria-expanded="false"><i class="ti-comment"></i>Chat History</a>
+						<a class="nav-link" href="{% url 'logout' %}"><i class="ti-shift-right"></i>LogOut</a>
+					</div>
+				</div>
+				<div class="tab-content dashboard-wrap" id="v-pills-tabContent">
+					<!-- Woner Wallete Content -->
+					<div class="tab-pane fade active show" id="wwallete" role="tabpanel" aria-labelledby="v-pills-wwallete-tab" aria-expanded="true">
+						<div class="row">
+							<div class="col-lg-4 col-md-4 col-sm-12">
+								
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-12">
+								<div class="widget simple-widget" >
+									<div class="rwidget-caption info">
+										<div class="row">
+											<div class="col-4 padd-r-0">
+												<i class="text-info icon ti-wallet"></i>
+											</div>
+											<div class="col-8">
+												<div class="widget-detail">
+													<h3>{{ user.wallet.balance }} INR</h3>
+													<span>Wallete</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-lg-4 col-md-4 col-sm-12">
+								
+							</div>
+
+						</div>
+						
+						<div class="row m-3">
+							<div class="tr-single-box">
+								<div class="tr-single-header">
+									<h4><i class="ti-headphone"></i> Set Your Payment Methode</h4>
+								</div>
+								
+								<div class="tr-single-body">
+									<div class="row">
+										<div class="payment-opt-tab">
+											<ul class="nav nav-tabs" id="myTab" role="tablist">
+												<li class="nav-item">
+													<a class="nav-link active" id="credit-tab" data-toggle="tab" href="#credit" role="tab" aria-controls="credit" aria-selected="true" aria-expanded="true">
+														<img src="assets/img/vm-card.png" alt="">
+													</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" id="skrill-tab" data-toggle="tab" href="#skrill" role="tab" aria-controls="skrill" aria-selected="false" aria-expanded="false">
+														<img src="assets/img/skrill.png" alt="">
+													</a>
+												</li>
+												<li class="nav-item">
+													<a class="nav-link" id="paypal-tab" data-toggle="tab" href="#paypal" role="tab" aria-controls="paypal" aria-selected="false" aria-expanded="false">
+														<img src="assets/img/paypal.png" alt="">
+													</a>
+												</li>
+											</ul>
+										</div>
+										<div class="tab-content" id="myTabContent">
+											<div class="tab-pane fade active show" id="credit" role="tabpanel" aria-labelledby="credit-tab" aria-expanded="true">
+												<form>
+													<div class="row">
+
+														<div class="col-sm-12 form-group">
+															<input type="text" class="form-control" name="card_holder" placeholder="Full name on card">
+															<i class="ti-credit-card form-control-feedback"></i>
+														</div>
+
+														<div class="col-sm-12 form-group">
+															<input type="text" class="form-control input-default" name="card-number" placeholder="Valid Account Number">
+															<i class="fa fa-credit-card-alt fa-lg fa-fix form-control-feedback"></i>
+														</div>
+
+														<div class="col-sm-12 form-group">
+															<button class="btn btn-payment" type="submit">Done</button>
+														</div>
+													
+													</div>
+												</form>	
+											</div>
+											<div class="tab-pane fade" id="skrill" role="tabpanel" aria-labelledby="skrill-tab" aria-expanded="false">
+												<form>
+													<div class="row">
+
+														<div class="col-sm-12 form-group">
+															<input type="text" class="form-control" name="skrill_full_name" placeholder="Full name on skrill">
+															<i class="ti-credit-card form-control-feedback"></i>
+														</div>
+
+														<div class="col-sm-8 form-group">
+															<input type="text" class="form-control" name="skrill_mail" placeholder="Email address on skrill">
+															<i class="ti-email form-control-feedback"></i>
+														</div>
+
+														<div class="col-sm-4 form-group input-group">
+															<span class="input-group-addon"><i class="fa fa-usd"></i></span>
+															<input type="number" name="amount" class="form-control input-default" placeholder="Payment Amount">
+														</div>
+
+														<div class="col-sm-12 form-group">
+															<button class="btn btn-payment" type="submit">Done</button>
+														</div>
+													
+													</div>
+												</form>
+											</div>
+											<div class="tab-pane fade" id="paypal" role="tabpanel" aria-labelledby="paypal-tab" aria-expanded="false">
+												<form>
+													<div class="row">
+
+														<div class="col-sm-12 form-group">
+															<input type="text" class="form-control" name="paypal_full_name" placeholder="Paypal Email Address">
+															<i class="ti-credit-card form-control-feedback"></i>
+														</div>
+
+														<div class="col-sm-12 form-group">
+															<button class="btn btn-payment" type="submit">Done</button>
+														</div>
+														
+													</div>
+												</form>
+											</div>
+										</div>
+								
+									</div>
+									
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					<!-- Profile Content -->
+					<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" aria-expanded="false">
+						<form class="dash-profile-form" action="{% url 'chngprof' %}" method="POST">
+							{% csrf_token %}
+							<!-- Basic Info -->
+							<div class="tr-single-box">
+								<div class="tr-single-header">
+									<h4><i class="ti-share"></i> Update Profile</h4>
+								</div>
+								
+								<div class="tr-single-body">
+									<div class="form-group">
+										<label>First Name</label>
+										<input class="form-control" name="firstname" id="firstname" type="text" value="{{user.first_name}}">
+									</div>
+									<div class="form-group">
+										<label>Last Name</label>
+										<input class="form-control"  name="lastname" id="lastname"type="text"  value="{{user.last_name}}">
+									</div>
+									<div class="form-group">
+										<label>User Name</label>
+										<input class="form-control"  name="username" id="username"type="text"  value="{{user.username}}">
+									</div>
+									<div class="form-group">
+										<label>Email</label>
+										<input class="form-control"  name="email" id="email"type="email"  value="{{user.email}}">
+									</div>
+								</div>
+							</div>
+							<input type="submit" class="btn btn-primary full-width mb-4" value="Save Changes">
+						</form>
+							<!-- Change Password -->
+                        <form class="dash-profile-form" action="{% url 'chngpass' %}" method="POST">
+							{% csrf_token %}
+							<div class="tr-single-box">
+								<div class="tr-single-header">
+									<h4><i class="lni-lock"></i> Change Password</h4>
+								</div>
+								
+								<div class="tr-single-body">
+									<div class="form-group">
+										<label>Current Password</label>
+										<input class="form-control"  name="oldpass" id="oldpass"type="password"  value="{{user.password}}">
+									</div>
+									<div class="form-group">
+										<label>New Password</label>
+										<input class="form-control"  name="newpass" id="newpass" type="password" >
+									</div>
+									<div class="form-group">
+										<label>Confirm Password</label>
+										<input class="form-control"  name="confpass" id="confpass"type="password" >
+									</div>
+								</div>
+							</div>
+							<input type="submit" class="btn btn-primary full-width mb-4" value="Change Password">
+						</form>
+					</div>
+
+					<div class="tab-pane fade" id="appointments" role="tabpanel" aria-labelledby="v-pills-profile-tab" aria-expanded="false">
+						
+                   {% if user.profile.user_role == 'Astrologer' %}
+                   <hr><h1 align="center">Appointments</h1><hr>
+                  <div class = "jumbotron">
+                   <div class="container">
+                   <div class="row">
+                   <table class="table table-dark table-sm">
+    <tr><th>Customer</th><th>Astrologer</th><th>Room Number</th><th>Room Link</th></tr>
+    {% for r in Req %}
+    <tr>
+    <td><h6>{{ r.user }}</h6></td>
+    <td><h6>{{ r.astrologer }}</h6></td>
+    <td><h6>{{ r.room_name }}</h6></td>
+    <td><h6><a href="{% url 'astrochat' r.room_name %}">Go</a></h6></td></tr>
+    {% endfor %}
+
+    </table>
+</div>
+</div>
+</div>
+</div>
+
+                  <div class="tab-pane fade" id="astrology" role="tabpanel" aria-labelledby="v-pills-profile-tab" aria-expanded="false">
+
+
+                  	<div class="container">
+  <div class="row" >
+
+    
+
+
+    <div class="col-md-3" style="background-color: white; text-align: center;">
+      <hr><h1 align="center">Horoscopes</h1><hr>
+      <br>
+      <a href="{% url 'viewdailyhoroscopelist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Daily Horoscopes</a>
+      <br><br>
+       <a href="{% url 'viewmonthlyhoroscopelist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Monthly Horoscopes</a>
+       <br><br>
+        <a href="{% url 'viewweeklyhoroscopelist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Weekly Horoscopes</a>
+       <br><br>
+        <a href="{% url 'viewyearlyhoroscopelist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Yearly Horoscopes</a>
+       <br><br>
+    </div>
+  
+    
+    <div class="col-md-3" style="background-color: white; text-align: center;">
+        <hr><h1 align="center">Panchangs</h1><hr>
+      <br>
+      <a href="{% url 'viewdailypanchanglist' %}" class="btn btn-outline-success btn-sm">Create/Edit Daily Panchangs</a>
+      <br><br>
+       <a href="{% url 'viewhindumonthyearlist' %}" class="btn btn-outline-success btn-sm">Create/Edit Hindu Month Year</a>
+       <br><br>
+        <a href="{% url 'viewdailysolarcyclelist' %}" class="btn btn-outline-success btn-sm">Create/Edit Daily Solar Cycle</a>
+       <br><br>
+        <a href="{% url 'viewdailytimingslist' %}" class="btn btn-outline-success btn-sm">Create/Edit Timings</a>
+       <br><br>
+      </div>
+
+    <div class="col-md-3" style="background-color: white; text-align: center;">
+     <hr><h1 align="center">Numerology</h1><hr>
+      <br>
+      <a href="{% url 'dailynumerologylist' %}" class="btn btn-outline-warning btn-sm">Create/Edit Daily Numerology</a>
+      <br><br>
+       <a href="{% url 'weeklynumerologylist' %}" class="btn btn-outline-warning btn-sm">Create/Edit Weekly Numerology</a>
+       <br><br>
+        <a href="{% url 'monthlynumerologylist' %}" class="btn btn-outline-warning btn-sm">Create/Edit Monthy Numerology</a>
+       <br><br>
+        <a href="{% url 'yearlynumerologylist' %}" class="btn btn-outline-warning btn-sm">Create/Edit Yearly Numerology</a>
+       <br><br>
+     </div>
+  
+    <div class="col-md-3" style="background-color: white; text-align: center;">
+     <hr><h1 align="center">Others</h1><hr>
+      <br>
+      <a href="{% url 'yearlytarotlist' %}" class="btn btn-outline-danger btn-sm">Create/Edit Yearly Tarot</a>
+      <br><br>
+       <a href="" class="btn btn-outline-danger btn-sm">Create/Edit Tarot Articles</a>
+       <br><br>
+        <a href="" class="btn btn-outline-danger btn-sm">Create/Edit Tarot Answers</a>
+       <br><br>
+        <a href="" class="btn btn-outline-danger btn-sm">Create/Edit Kudlis</a>
+       <br><br>
+     </div>
+
+
+
+  </div>
+   
+   </div>
+
+                  </div>
+
+<div class="tab-pane fade" id="editastroprofile" role="tabpanel" aria-labelledby="v-pills-profile-tab" aria-expanded="false">
+                  <div class="container">
+<div class="card card-body">
+
+
+<form action="{% url 'updateastroprofile' %}" method="POST">
+	{% csrf_token %}
+	<div class="row">
+	  <div class="col-md-6">
+	  <hr>	
+	    <Label for="id_skill"><h6>{{ form.skill.label}}</h6></Label>
+        
+	    {{ form.skill}}<br>
+      <br>
+      </div>
+      <div class="col-md-6">
+      <hr>	
+	    <Label for="experience"><h6>{{ form.experience.label }}</h6></Label>
+        
+	    {{ form.experience }}<br>
+      <br>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+      <hr>	
+	    <Label for="location"><h6>{{ form.location.label }}</h6></Label>
+        
+	    {{ form.location}}<br>
+      <br>
+      </div>
+      <div class="col-md-6">
+      <hr>	
+	    <Label for="about"><h6>{{ form.about.label }}</h6></Label>
+        
+	    {{ form.about}}<br>
+      <br>
+      </div>
+    </div>
+    <div class="row">
+    <div class="col-md-6">
+    <hr>	
+	    <Label for="language"><h6>{{ form.language.label }}</h6></Label>
+        <hr><h6>Choose any two</h6>
+	    {{ form.language }}<br>
+    <br>
+    </div>
+    </div>
+
+
+      <button type="submit">Submit</button>
+</form>
+
+</div>
+</div>
+
+
+
+
+</div>
+
+
+                      {% endif %}
+  
+
+                        
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
+{% endif %}
+{% else %}
+<hr><hr><hr><hr><hr><hr><hr>
+<div class="jumbotron">
+Hey {{ user.username }} Complete Your Profile <a href="{% url 'completeprofile' %}"><u>here</u></a>
+</div>			
+{% endif %}
+        {% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+
+<hr><hr><hr><hr><hr><hr>
+<hr>
+<h1 align="center">Yearly Numerology</h1>
+<hr>
+<div class="jumbotron">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+	  <a href="{% url 'dashboard'%}" class="btn btn-success"><< Go To Dashbboard</a>
+    
+	  <a href="{% url 'createyearlynumerology'%}" class="btn btn-primary">Create Yearly Numerology</a><br><br>
+    </div> 
+   <div class="col-sm-6">
+        <p align="center">
+        <br>
+     <a href="{% url 'dailynumerologylist' %}" class="btn btn-outline-success btn-sm ">Create/Edit Daily Numerology</a>
+     <a href="{% url 'weeklynumerologylist' %}" class="btn btn-outline-success btn-sm">Create/Edit Weekly Numerology</a>
+     <a href="{% url 'monthlynumerologylist' %}" class="btn btn-outline-success btn-sm">Create/Edit Monthly Numerology</a>
+     
+     </p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+
+  	<div class="col-sm-12">
+
+  		
+     <table class="table table-striped table-sm">
+     	<tr>
+        <th>S.No</th>
+        <th>Writer</th>
+        <th>Year</th>
+        <th>Number</th>
+        <th></th>
+        <th></th>
+      </tr>
+     	{% for dh in yearly_num %}
+     	<tr>
+     		<td>{{dh.id}}</td>
+     		<td>{{dh.astroprofile}}</td>
+     		<td>{{dh.year}}</td>
+        <td>{{dh.number}}</td>
+     		
+     		<td><a href="{% url 'edityearlynumerology' dh.id %}" class="btn btn-warning btn-sm">Edit Yearly Numerology</a></td>
+     		<td><a href="{% url 'deleteyearlynumerology' dh.id %}" class="btn btn-danger btn-sm">Delete Yearly Numerology</a></td>
+     	</tr>
+     	{% endfor %}
+
+
+     </table>
+  	</div>
+  	
+  
+
+     
+  	
+  </div>
+</div>
+
+
+{% endblock %}

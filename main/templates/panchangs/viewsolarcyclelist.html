@@ -1,0 +1,79 @@
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+
+<hr><hr><hr><hr><hr><hr>
+<hr>
+<h1 align="center">Daily Solar Cycle</h1>
+<hr>
+<div class="jumbotron">
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+	  <a href="{% url 'dashboard'%}" class="btn btn-success"><< Go To Dashbboard</a>
+    
+	  <a href="{% url 'createdailysolarcycle'%}" class="btn btn-primary">Create Solar Cycle</a><br><br>
+    </div> 
+   <div class="col-sm-6">
+        <p align="center">
+        <br>
+     <a href="{% url 'viewdailypanchanglist' %}" class="btn btn-outline-primary btn-sm ">Create/Edit Panchang</a>
+     <a href="{% url 'viewhindumonthyearlist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Hindu Month Year</a>
+     <a href="{% url 'viewdailytimingslist' %}" class="btn btn-outline-primary btn-sm">Create/Edit Daily Timings</a>
+     
+     </p>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row">
+
+  	<div class="col-sm-12">
+
+  		
+     <table class="table table-striped table-sm">
+     	<tr>
+        <th>S.No</th>
+        <th>Writer</th>
+        <th>date</th>
+        <th>Sunrise</th>
+        <th>Sunset</th>
+        <th>Moonsign</th>
+        <th>Moonrise</th>
+        <th>Moonset</th>
+        <th>Ritu</th>
+        <th></th>
+        <th></th>
+      </tr>
+     	{% for dh in daily_solarcycle %}
+     	<tr>
+     		<td>{{dh.id}}</td>
+     		<td>{{dh.astroprofile}}</td>
+     		<td>{{dh.date}}</td>
+     		<td>{{dh.sunrise}}</td>
+     		<td>{{dh.sunset}}</td>
+        <td>{{dh.moonsign}}</td>
+        <td>{{dh.moonrise}}</td>
+        <td>{{dh.moonset}}</td>
+        <td>{{dh.ritu}}</td>
+     		<td><a href="{% url 'editdailysolarcycle' dh.id %}" class="btn btn-warning btn-sm">Edit SolarCycle</a></td>
+     		<td><a href="{% url 'deletedailysolarcycle' dh.id %}" class="btn btn-danger btn-sm">Delete SolarCycle</a></td>
+     	</tr>
+     	{% endfor %}
+
+
+     </table>
+  	</div>
+  	
+  
+
+     
+  	
+  </div>
+</div>
+
+
+{% endblock %}

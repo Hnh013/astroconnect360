@@ -1,0 +1,84 @@
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+
+<hr><hr><hr><hr><hr><hr>
+
+
+
+
+<div class=row>
+	<div class="col-sm-2">
+
+</div>
+
+<div class="col-sm-8">
+	
+<div >
+  <p align="center"><img src="{{ horoscope.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+  <div>
+    <p align="center">{{ horoscope.zodiac }} {{ horoscope.category }} Horoscope </p>
+    <p align="center">For {{horoscope.year }}</p>
+    <p>{{ horoscope.content }}</p>
+  </div>
+</div>
+    
+</div>
+<div class="col-sm-2">
+
+</div>
+
+</div>
+
+
+<section>
+  <div class="container">
+    <div class="row">
+
+{% for szh in sim_zodi_horo %}
+<div class="col-md-4">
+<div class="card-body" style="max-width: 18rem;">
+  <p align="center"><img src="{{ szh.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+  <div>
+    <p class="card-title" align="center">{{ szh.zodiac }} {{ szh.category }} Horoscope </p>
+    <p class="card-text" align="center">For {{ szh.year}}</p>
+    <p class="card-text">{{ szh.content|truncatechars:200 }}</p>
+    <p align="center"><a href="{% url 'viewyearlyhoroscope' szh.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+  </div>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+</section>
+
+
+<hr>
+<h1 align="center"> MORE HOROSCOPES</h1>
+  <h3 align="center"> More Horoscopes for {{ horoscope.year }} </h3>
+  <hr>
+<section class="lst">
+  <div class="container">
+          <div class="owl-carousel" id="list-slide">
+
+{% for sdh in sim_year_horo %}
+
+<div class="card-body" style="max-width: 18rem;">
+  <p align="center"><img src="{{ sdh.image.url }}" style="height: 100px; width: 100px; border-radius: 50%;"></p>
+  <div>
+    <p class="card-title" align="center">{{ sdh.zodiac }} {{ sdh.category }} Horoscope </p>
+    <p class="card-text" align="center">for {{sdh.year}}</p>
+    <p class="card-text">{{ sdh.content|truncatechars:90 }}</p>
+    <p align="center"><a href="{% url 'viewyearlyhoroscope' sdh.id %}" class="btn btn-primary btn-sm">View full Horoscope</a></p>
+  </div>
+</div>
+
+{% endfor %}
+</div>
+</div>
+</section>
+
+{% endblock %}

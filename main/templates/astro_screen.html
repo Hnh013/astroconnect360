@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- This screen has just number of appointment requests received and to reply them  --->
+
+	<title></title>
+	<script type="text/javascript"src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script>
+
+// function to reload after every sec but not working
+
+	 $(document).ready(
+            function() {
+
+                setInterval(function() {
+                    type: 'GET',
+                    url: '/chat/astroscreen/',
+                    success: function() {}
+                }, 1000);
+            });
+        </script>
+</head>
+<body>
+ <div id="show" align="center"></div>
+ 
+    <div align="center">
+        <p>
+           
+        </p>
+
+{% if user.wallet.role == 'Astrologer' %}
+
+
+Hello {{ user.username }}
+<br>
+You have following requests
+<br>
+
+<!-- check appointments -->
+<table>
+{% for appt in appts %}
+<tr>
+  <td>{{ appt.id }}</td>
+  <td>{{ appt.customer }}</td>
+  <td>{{ appt.time_created }}  </td>
+  <td>{{ status }}</td>
+  <td><a class="button" href="{% url 'reply' appt.id %}">Reply</a></td>
+</tr>
+{% endfor %}
+</table>
+
+{% endif %}        
+    
+
+</div>
+
+
+
+
+</body>
+</html>

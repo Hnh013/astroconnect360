@@ -1,0 +1,20 @@
+Hello {{ user.username }}
+
+
+
+
+<form method="POST">
+	{% csrf_token %}
+
+	<!--- appointment from as filled by customer --->
+
+
+	{{ form1.as_p }}
+	<hr>
+
+	<!--- reply form by astrologer --->
+
+	{{ form2.as_p }}
+	{{ n }}
+	<button type="submit">Submit</button>
+</form>

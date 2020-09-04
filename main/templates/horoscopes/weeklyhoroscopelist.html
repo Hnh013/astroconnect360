@@ -1,0 +1,54 @@
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+
+<hr><hr><hr><hr><hr><hr>
+
+ 
+
+<hr>  <h1 align="center">Weekly Horoscopes</h1><hr>
+<div class="jumbotron">
+	<a href="{% url 'dashboard'%}" class="btn btn-success"><< Go To Dashbboard</a><br><br>
+   <a href="{% url 'createweeklyhoroscope'%}" class="btn btn-primary">Create Horoscope</a><br><br>
+
+<div class="container">
+  <div class="row">
+  	<div class="col-sm-8">
+
+  	
+     <table class="table table-striped table-sm">
+     	<tr><th>S.No</th><th>Writer</th><th>Zodiac</th><th>From Date</th><th>To Date</th><th>Category</th><th></th><th></th></tr>
+     	{% for dh in weekly_horo %}
+     	<tr>
+     		<td>{{dh.id}}</td>
+     		<td>{{dh.astroprofile}}</td>
+     		<td>{{dh.zodiac}}</td>
+     		<td>{{dh.from_date}}</td>
+        <td>{{dh.to_date}}</td>
+     		<td>{{dh.category}}</td>
+     		<td><a href="{% url 'editweeklyhoroscope' dh.id %}" class="btn btn-warning btn-sm">Edit Horoscope</a></td>
+     		<td><a href="{% url 'deleteweeklyhoroscope' dh.id %}" class="btn btn-danger btn-sm">Delete Horoscope</a></td>
+     	</tr>
+     	{% endfor %}
+
+
+     </table>
+  	</div>
+  	<div class="col-sm-4">
+  		<p align="center">
+     <a href="{% url 'viewdailyhoroscopelist' %}" class="btn btn-primary">Create/Edit Daily Horoscope</a><br><br>
+     <a href="{% url 'viewmonthlyhoroscopelist' %}" class="btn btn-primary">Create/Edit Monthly Horoscope</a><br><br>
+     <a href="{% url 'viewyearlyhoroscopelist' %}" class="btn btn-primary">Create/Edit Yearly Horoscope</a><br><br>
+     </p>
+     
+  	</div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}

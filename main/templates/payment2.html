@@ -1,0 +1,302 @@
+{% extends 'templating.html' %}
+{% load static %}
+	{% block metatag %}
+	<title>Astro Website</title>		
+	{% endblock %}
+	{% block content %}	
+	<script src="https://js.stripe.com/v3/"></script>
+	<br><br><br><br><br>
+	<!-- =========================== Recent Listing Start ============================================ -->
+	<section class="grey">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-8">		
+					<!-- Billing information -->
+					<form action="{% url 'charge' %}" method="post" id="payment-form">
+							
+					<div class="tr-single-box">
+						<div class="tr-single-header">
+							<h4><i class="ti-headphone"></i> Billing information</h4>
+						</div>
+						
+						<div class="tr-single-body">
+							<div class="row">
+							
+								<div class="col-lg-6 col-md-6">
+									<div class="form-group">
+										<label>First Name</label>
+										<input class="form-control" type="text" value="{{user.first_name}}" readonly>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-6">
+									<div class="form-group">
+										<label>Last Name</label>
+										<input class="form-control" type="text" value="{{user.last_name}}" readonly>
+									</div>
+								</div>
+								
+								<div class="col-lg-6 col-md-6">
+									<div class="form-group">
+										<label>Email</label>
+										<input class="form-control" type="email" value="{{user.email}}" readonly>
+									</div>
+								</div>
+								
+								<div class="col-lg-6 col-md-6">
+									<div class="form-group">
+										<label>Mobile</label>
+										<input class="form-control" type="text" value="{{user.profile.phone}}" readonly>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					
+					<!-- Payment Methode -->
+					<div class="tr-single-box">
+						<div class="tr-single-header">
+							<h4><i class="ti-headphone"></i> Payment Methode</h4>
+						</div>
+						
+						<div class="tr-single-body">
+							<div class="row m-0">
+								<div class="payment-opt-tab">
+									<ul class="nav nav-tabs" id="myTab" role="tablist">
+										<li class="nav-item">
+											<a class="nav-link active" id="credit-tab" data-toggle="tab" href="#credit" role="tab" aria-controls="credit" aria-selected="true">
+												<img src="assets/img/vm-card.png" alt="">
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="skrill-tab" data-toggle="tab" href="#skrill" role="tab" aria-controls="skrill" aria-selected="false">
+												<img src="assets/img/skrill.png" alt="">
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" id="paypal-tab" data-toggle="tab" href="#paypal" role="tab" aria-controls="paypal" aria-selected="false">
+												<img src="assets/img/paypal.png" alt="">
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id="credit" role="tabpanel" aria-labelledby="credit-tab">
+										<form>
+											<div class="row">
+
+												<div class="col-sm-12 form-group">
+													<input type="text" class="form-control" name="card_holder" placeholder="Full name on card">
+													<i class="ti-credit-card form-control-feedback"></i>
+												</div>
+
+												<div class="col-sm-12 form-group">
+													<input type="text" class="form-control input-default" name="card-number" placeholder="Valid Card Number">
+													<i class="fa fa-credit-card-alt fa-lg fa-fix form-control-feedback"></i>
+												</div>
+
+												<div class="col-sm-2 form-group">
+													<select name="card_month" class="form-control">
+														<option value="">Month</option>
+														<option>1</option>
+														<option>2</option>
+														<option>3</option>
+														<option>4</option>
+														<option>5</option>
+														<option>6</option>
+														<option>7</option>
+														<option>8</option>
+														<option>9</option>
+														<option>10</option>
+														<option>11</option>
+														<option>12</option>
+													</select>
+												</div>
+
+												<div class="col-sm-2 form-group">
+													<select name="card_year" class="form-control">
+														<option value="">Year</option>
+														<option>2017</option>
+														<option>2018</option>
+														<option>2019</option>
+														<option>2020</option>
+														<option>2021</option>
+														<option>2022</option>
+														<option>2023</option>
+														<option>2024</option>
+														<option>2025</option>
+														<option>2026</option>
+														<option>2027</option>
+														<option>2028</option>
+														<option>2029</option>
+														<option>2030</option>
+													</select>
+												</div>
+
+												<div class="col-sm-2 form-group">
+													<input type="text" name="card_cvc" class="form-control" placeholder="CVC">
+												</div>
+
+												<div class="col-sm-6 form-group input-group">
+													<span class="input-group-addon"><i class="fa fa-usd"></i></span>
+													<input type="number" name="value" class="form-control input-default" placeholder="Payment Amount">
+												</div>
+
+												<div class="col-sm-12 form-group">
+													<button class="btn btn-payment" type="submit">Done</button>
+												</div>
+											
+											</div>
+										</form>	
+									</div>
+									<div class="tab-pane fade" id="skrill" role="tabpanel" aria-labelledby="skrill-tab">
+										<form>
+											<div class="row">
+
+												<div class="col-sm-12 form-group">
+													<input type="text" class="form-control" name="skrill_full_name" placeholder="Full name on skrill">
+													<i class="ti-credit-card form-control-feedback"></i>
+												</div>
+
+												<div class="col-sm-8 form-group">
+													<input type="text" class="form-control" name="skrill_mail" placeholder="Email address on skrill">
+													<i class="ti-email form-control-feedback"></i>
+												</div>
+
+												<div class="col-sm-4 form-group input-group">
+													<span class="input-group-addon"><i class="fa fa-usd"></i></span>
+													<input type="number" name="amount" class="form-control input-default" placeholder="Payment Amount">
+												</div>
+
+												<div class="col-sm-12 form-group">
+													<button class="btn btn-payment" type="submit">Done</button>
+												</div>
+											
+											</div>
+										</form>
+									</div>
+									<div class="tab-pane fade" id="paypal" role="tabpanel" aria-labelledby="paypal-tab">
+										<form>
+											<div class="row">
+
+												<div class="col-sm-12 form-group">
+													<input type="text" class="form-control" name="paypal_full_name" placeholder="Full name on paypal">
+													<i class="ti-credit-card form-control-feedback"></i>
+												</div>
+
+												<div class="col-sm-8 form-group">
+													<input type="text" class="form-control" name="paypal_email" placeholder="Email address on paypal">
+													<i class="ti-email form-control-feedback"></i>
+												</div>
+
+												<div class="col-sm-4 form-group input-group">
+													<span class="input-group-addon"><i class="fa fa-usd"></i></span>
+													<input type="number" name="amount" class="form-control input-default" placeholder="Payment Amount">
+												</div>
+
+												<div class="form-row">
+				    <label for="card-element">
+				      Credit or debit card
+				    </label>
+				    <div id="card-element">
+				      A Stripe Element will be inserted here.
+				    </div>
+
+				     Used to display form errors. 
+				    <div id="card-errors" role="alert"></div>
+				  </div>
+
+												<div class="col-sm-12 form-group">
+													<input class="btn btn-payment" type="submit" value="Submit Payment" name="">
+													
+												</div>
+												
+											</div>
+										</form>
+									</div>
+								</div>
+						
+							</div>
+							
+						</div>
+					</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- =========================== Recent Listing End ============================================ -->	
+
+	<script>
+		// Create a Stripe client.
+		var stripe = Stripe('pk_test_51GzwicFlMZrJNY0xehs2bP5I5Ebjr47Q4FagsFa0PqQxAxLCQ9Yh5ITQHG3d8J5V9El0VKKTJFEFoW7uUKy20aS700cUOcPC0R');
+
+		// Create an instance of Elements.
+		var elements = stripe.elements();
+
+		// Custom styling can be passed to options when creating an Element.
+		// (Note that this demo uses a wider set of styles than the guide below.)
+		var style = {
+		  base: {
+		    color: '#32325d',
+		    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+		    fontSmoothing: 'antialiased',
+		    fontSize: '16px',
+		    '::placeholder': {
+		      color: '#aab7c4'
+		    }
+		  },
+		  invalid: {
+		    color: '#fa755a',
+		    iconColor: '#fa755a'
+		  }
+		};
+
+		// Create an instance of the card Element.
+		var card = elements.create('card', {style: style});
+
+		// Add an instance of the card Element into the `card-element` <div>.
+		card.mount('#card-element');
+
+		// Handle real-time validation errors from the card Element.
+		card.addEventListener('change', function(event) {
+		  var displayError = document.getElementById('card-errors');
+		  if (event.error) {
+		    displayError.textContent = event.error.message;
+		  } else {
+		    displayError.textContent = '';
+		  }
+		});
+
+		// Handle form submission.
+		var form = document.getElementById('payment-form');
+		form.addEventListener('submit', function(event) {
+		  event.preventDefault();
+
+		  stripe.createToken(card).then(function(result) {
+		    if (result.error) {
+		      // Inform the user if there was an error.
+		      var errorElement = document.getElementById('card-errors');
+		      errorElement.textContent = result.error.message;
+		    } else {
+		      // Send the token to your server.
+		      stripeTokenHandler(result.token);
+		    }
+		  });
+		});
+
+		// Submit the form with the token ID.
+		function stripeTokenHandler(token) {
+		  // Insert the token ID into the form so it gets submitted to the server
+		  var form = document.getElementById('payment-form');
+		  var hiddenInput = document.createElement('input');
+		  hiddenInput.setAttribute('type', 'hidden');
+		  hiddenInput.setAttribute('name', 'stripeToken');
+		  hiddenInput.setAttribute('value', token.id);
+		  form.appendChild(hiddenInput);
+
+		  // Submit the form
+		  form.submit();
+		}
+	</script>
+	{% endblock %}
